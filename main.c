@@ -2,11 +2,16 @@
 
 int main(int argc, char* argv[])
 {
-
+    // Initialize SDL
     if(SDL_Init(SDL_INIT_VIDEO) != 0){
         printf("Errore inizializzazione SDL\n");
         return 1;
     }
+    
+    // Set OpenGL version and profile attributes before creating window
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Window creation and Settings
     SDL_Window *window = SDL_CreateWindow(
