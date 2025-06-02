@@ -25,17 +25,28 @@ int main(int argc, char* argv[])
 
     if (window == NULL){
         printf("Errore nella creazione della window \n");
+        SDL_Quit();
         return 1;
     }
 
-    /* Enable multisampling for a nice antialiased effect */
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
     SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
 
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    // Creazione di un Contesto OpenGl
+    SDL_GLContext glContext = SDL_GL_CreateContext(window);
+    if(glContext==NULL){
+        printf("Errore nella creazione del contesto OpenGL\n");
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
 
-    if (renderer == NULL){
-        printf("Errore nella creazione del renderer \n");
+    // Carica funzioni OpenGL con glad (o GLEW)
+    if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress)) {
+        printf("Errore nel caricamento di GLAD\n");
+        SDL_GL_DeleteContext(glContext);
+        SDL_DestroyWindow(window);
+        SDL_Quit();
         return 1;
     }
 
@@ -55,5 +66,6 @@ int main(int argc, char* argv[])
     }
 
 
+    SDL_DestroyWindow(window);
     return 0;
 }

@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
+#include <GL/glew.h>
 
 #define SCREEN_WIDTH 600
 #define SCREEN_HEIGHT 600
