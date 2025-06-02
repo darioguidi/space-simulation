@@ -1,5 +1,8 @@
 #include "function.h"
 
+GLuint VAO;
+GLuint VBO;
+
 int main(int argc, char* argv[])
 {
     // Inizializza SDL con il supporto video
@@ -49,6 +52,10 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    Point *space_points = generateSpaceGrid();
+    setupSpaceGrid(space_points, 8);
+    free(space_points);
+
     // Loop principale del programma
     int running = 1;
     SDL_Event event;
@@ -67,9 +74,10 @@ int main(int argc, char* argv[])
         // Pulisce il buffer colore usando il colore impostato
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Rendering della scena (da implementare)
+        // Rendering della scena 
+        drawSpaceGrid();
 
-        SDL_Delay(16);              // Pausa per mantenere circa 60 FPS
+        SDL_Delay(16);              // 60 FPS
         SDL_GL_SwapWindow(window);  // Scambia i buffer per visualizzare il frame appena renderizzato
     }
 

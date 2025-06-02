@@ -11,6 +11,17 @@
 #define SCREEN_OFFSET_X SCREEN_WIDTH/2
 #define SCREEN_OFFSET_Y SCREEN_WIDTH/2
 
+extern GLuint VAO;
+extern GLuint VBO;
 
+typedef struct Point {
+    int x;
+    int y;
+    int z;
+} Point;
+
+Point* generateSpaceGrid();
+void setupSpaceGrid(Point* points, int count);
+void drawSpaceGrid();
 
 
