@@ -29,8 +29,9 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     // Creazione di un Contesto OpenGl
     SDL_GLContext glContext = SDL_GL_CreateContext(window);
@@ -41,14 +42,15 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    // Carica funzioni OpenGL con glad (o GLEW)
-    if (!gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress)) {
-        printf("Errore nel caricamento di GLAD\n");
+    GLenum err = glewInit();
+    if (err != GLEW_OK) {
+        printf("Errore nell'inizializzazione di GLEW: %s\n", glewGetErrorString(err));
         SDL_GL_DeleteContext(glContext);
         SDL_DestroyWindow(window);
         SDL_Quit();
         return 1;
     }
+
 
     int running = 1;
     SDL_Event event;
