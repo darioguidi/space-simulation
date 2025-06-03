@@ -66,11 +66,36 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    // Generazione punti spazio 
     Point *space_points = generateSpaceGrid();
-    setupSpaceGrid(space_points, 8);
+    
+    // Creazione dell Array_Data
+    Point array_data[4];
+    for(int i=0;i<4;i++){
+        array_data[i] = *(space_points+i);
+    } 
+
+    setupSpaceGrid(space_points, 4);
     free(space_points);
 
+    // Impostazione della Viewport
     glViewport(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    // Definizione della Shader
+    GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    // Passiamo il codice definito sopra come stringa - GSLS
+    glShaderSource(vertexShader, 1, &vertexShederSource, NULL);
+    // Compilazione del codice in linguaggio assembly 
+    glCompileShader(vertexShader);
+
+    // Definizione della FragmentShader
+    GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+    // Passiamo il codice definito sopra come stringa - GSLS
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    // Compilazione del codice in linguaggio assembly 
+    glCompileShader(fragmentShader);
+
+
     
     // Imposta il colore di sfondo (nero opaco)
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

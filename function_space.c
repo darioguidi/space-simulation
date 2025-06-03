@@ -2,19 +2,13 @@
 
 Point* generateSpaceGrid()
 {
-    Point* points = malloc(8 * sizeof(Point));
-    // linea +x
+    Point* points = malloc(5 * sizeof(Point));
+
     points[0] = (Point){0, 0, 0};
     points[1] = (Point){1, 0, 0};
-    // linea -x
-    points[2] = (Point){0, 0, 0};
-    points[3] = (Point){-1, 0, 0};
-    // linea -z
-    points[4] = (Point){0, 0, 0};
-    points[5] = (Point){0, 0, -1};
-    // linea +z
-    points[6] = (Point){0, 0, 0};
-    points[7] = (Point){0, 0, 1};
+    points[2] = (Point){-1, 0, 0};
+    points[3] = (Point){0, 0, -1};
+    points[4] = (Point){0, 0, 1};
 
     return points;
 }
