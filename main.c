@@ -3,6 +3,15 @@
 GLuint VAO;
 GLuint VBO;
 
+const char* vertexShederSource = "#version 330 core\n"
+"layout (location 0) in vec3 aPos;\n"
+"void main()\n"
+"{\n"
+"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 10.0);\n"
+"}\n\0";
+
+
+
 int main(int argc, char* argv[])
 {
     // Inizializza SDL con il supporto video
@@ -56,6 +65,11 @@ int main(int argc, char* argv[])
     setupSpaceGrid(space_points, 8);
     free(space_points);
 
+    glViewport(0,0,SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    // Imposta il colore di sfondo (nero opaco)
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
     // Loop principale del programma
     int running = 1;
     SDL_Event event;
@@ -69,8 +83,6 @@ int main(int argc, char* argv[])
             }
         }
 
-        // Imposta il colore di sfondo (nero opaco)
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         // Pulisce il buffer colore usando il colore impostato
         glClear(GL_COLOR_BUFFER_BIT);
 
